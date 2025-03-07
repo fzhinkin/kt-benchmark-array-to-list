@@ -1,0 +1,31 @@
+= Kotlin benchmark array to list
+
+Looking at Kotlin source code of `Array.toList()`, `Array.take(n: Int)` and `Array.takeLast(n: Int)`, methods, one can see that they all use a loop to copy elements from the array to the target list.
+
+At least on the JVM, there should be more efficient solutions based on `System.arrayCopy`.
+
+This project compares the standard library method with alternative methods based on direct array copies.
+
+For `toList()` method, we try the following alternatives:
+
+ * `listOf(*array)`
+ * `array.copyOf().asList()`
+
+Both methods copy initial array, but, contrary to std implementations, they return a fixed-sized list, where elements can only be replaced.
+Although it better match the `toList` semantic, it could break usages where users rely on the output list being fully mutable.
+
+Benchmark results tend to show that both alternate methods have similar performance, and both appear approximately twice as fast as current implementation.
+
+For `take(n)` and `takeLast(n)` methods. we try to replace the loop with `copyOfRange`. There again, the results show that the new method is approximately twice as fast.
+
+== Run the benchmark
+
+Run gradle `jmh` task: `./gradlew jmh`.
+The task will run the benchmark, print a human readable in standard output, and save a Json report in link:build/results/jmh/results.json[].
+The JSON report can be imported on https://jmh.morethan.io[] website to plot the results.
+
+== Project structure
+
+* Benchmarks are defined in link:src/jmh/kotlin/[]
+* Alternative methods used in benchmarks are defined in link:src/main/kotlin/[]
+* Alternative methods are tested in link:src/test/kotlin/[]
