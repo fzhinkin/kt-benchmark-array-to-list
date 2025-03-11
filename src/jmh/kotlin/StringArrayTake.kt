@@ -5,8 +5,8 @@ import java.util.HexFormat
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
-@Warmup(iterations = 2, time = 2, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 2, time = 2, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 4, time = 4, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 4, time = 4, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 2)
 open class StringArrayTake {
 
