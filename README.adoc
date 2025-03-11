@@ -21,8 +21,19 @@ For `take(n)` and `takeLast(n)` methods. we try to replace the loop with `copyOf
 == Run the benchmark
 
 Run gradle `jmh` task: `./gradlew jmh`.
-The task will run the benchmark, print a human readable in standard output, and save a Json report in link:build/results/jmh/results.json[].
+The task will run the benchmark, print a human-readable in standard output, and save a Json report in link:build/results/jmh/results.json[].
 The JSON report can be imported on https://jmh.morethan.io[] website to plot the results.
+
+=== Produce HTML report
+
+Benchmark results can be displayed in a graph/HTML document using https://github.com/jzillmann/gradle-jmh-report[gradle-jmh-report].
+
+To create the report, launch `.gradlew jmhReport`
+
+[NOTE]
+====
+`./gradlew jmh` is implied and automatically launched if necessary
+====
 
 == Project structure
 
