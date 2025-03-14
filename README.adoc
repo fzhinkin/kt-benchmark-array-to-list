@@ -37,6 +37,6 @@ To create the report, launch `.gradlew jmhReport`
 
 == Project structure
 
-* Benchmarks are defined in link:src/jmh/kotlin/[]
+* Benchmarks are defined in link:src/benchmark/kotlin/[]
 * Alternative methods used in benchmarks are defined in link:src/main/kotlin/[]
 * Alternative methods are tested in link:src/test/kotlin/[]

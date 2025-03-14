@@ -7,3 +7,7 @@ build
 # Ignore IntelliJ project files
 .idea
 *.iml
+
+# Kotlin multiplatform cache
+.kotlin
+kotlin-js-store
