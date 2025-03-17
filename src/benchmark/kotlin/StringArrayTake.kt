@@ -8,7 +8,7 @@ import kotlinx.benchmark.*
 @State(Scope.Benchmark)
 open class StringArrayTake {
 
-    @Param("32", "1000", "1000000")
+    @Param("32", "1000", "100000")
     var arraySize: Int? = null
     @Param("half", "all")
     var take: String? = null
@@ -20,7 +20,7 @@ open class StringArrayTake {
     @Setup
     fun init() {
         val arraySize = checkNotNull(arraySize) { "arraySize parameter not set"}
-        array = Array(arraySize) { Random.nextBytes(txtSize).joinToString() }
+        array = Array(arraySize) { Random.nextInt(0, 200).toString() }
         n = if (take == "half") arraySize / 2 else arraySize
     }
 
