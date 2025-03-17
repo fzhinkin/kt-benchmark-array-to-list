@@ -27,4 +27,13 @@ open class StringArrayToList {
 
     @Benchmark
     open fun usingCopyOfAsList() = array.toListUsingAsList()
+
+    @Benchmark
+    open fun filterAfterStd() = array.toList().filter { it[0] == '1' }
+
+    @Benchmark
+    open fun filterAfterCopyOfAsList() = array.toList().filter { it[0] == '1' }
+
+    @Benchmark
+    open fun filterAfterListOf() = array.toList().filter { it[0] == '1' }
 }

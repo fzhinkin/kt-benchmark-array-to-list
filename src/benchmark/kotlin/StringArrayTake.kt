@@ -35,4 +35,10 @@ open class StringArrayTake {
 
     @Benchmark
     open fun takeLastUsingNoLoop() = array.takeLastNoLoop(n!!)
+
+    @Benchmark
+    open fun filterAfterStd() = array.take(n!!).filter { it[0] == '1' }
+
+    @Benchmark
+    open fun filterAfterNoLoop() = array.takeNoLoop(n!!).filter { it[0] == '1' }
 }
