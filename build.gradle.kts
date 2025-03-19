@@ -65,6 +65,22 @@ dependencies {
 }
 
 benchmark {
+    configurations {
+        register("takeWhileSmallSize") {
+            include("\\.takeWhile.*")
+            param("arraySize", "0", "1", "3", "32")
+        }
+
+        register("takeWhileMiddleSize") {
+            include("\\.takeWhile.*")
+            param("arraySize", "256", "1000")
+        }
+
+        register("takeWhileBigSize") {
+            include("\\.takeWhile.*")
+            param("arraySize", "100000")
+        }
+    }
     targets {
         register("jvmBenchmark")
         register("linuxX64Benchmark")
