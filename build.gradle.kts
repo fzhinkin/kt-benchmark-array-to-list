@@ -66,6 +66,10 @@ dependencies {
 
 benchmark {
     configurations {
+        register("toMutableList") {
+            include("\\.StringArrayToMutableList\\.")
+        }
+
         register("flatten") {
             include("\\.flatten.*")
         }

@@ -11,3 +11,14 @@ fun <T> Array<T>.toListUsingAsList() : List<T> {
         else -> copyOf().asList()
     }
 }
+
+fun <T> Array<T>.toListHacked() : List<T> {
+    return ArrayAsListHacked(this).toMutableList()
+}
+
+
+private class ArrayAsListHacked<T>(val array: Array<T>) : List<T> by array.asList() {
+    fun toArray(): Array<out Any?> {
+        return array
+    }
+}

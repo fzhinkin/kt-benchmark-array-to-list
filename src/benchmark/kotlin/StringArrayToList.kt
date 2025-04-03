@@ -22,6 +22,9 @@ open class StringArrayToList {
     open fun usingStd() = array.toList()
 
     @Benchmark
+    open fun usingStdHacked() = array.toListHacked()
+
+    @Benchmark
     open fun usingListOf() = array.toListUsingListOf()
 
 
