@@ -18,22 +18,27 @@ Benchmark results tend to show that both alternate methods have similar performa
 
 For `take(n)` and `takeLast(n)` methods. we try to replace the loop with `copyOfRange`. There again, the results show that the new method is approximately twice as fast.
 
-== Run the benchmark
+== Run the benchmarks
 
-Run gradle `jmh` task: `./gradlew jmh`.
-The task will run the benchmark, print a human-readable in standard output, and save a Json report in link:build/results/jmh/results.json[].
-The JSON report can be imported on https://jmh.morethan.io[] website to plot the results.
+You can launch all benchmarks at once using `./gradlew benchmark`.
 
-=== Produce HTML report
-
-Benchmark results can be displayed in a graph/HTML document using https://github.com/jzillmann/gradle-jmh-report[gradle-jmh-report].
-
-To create the report, launch `.gradlew jmhReport`
-
-[NOTE]
+[WARNING]
 ====
-`./gradlew jmh` is implied and automatically launched if necessary
+It takes a lot of time and uses a lot of CPU
 ====
+
+Alternatively, individual benchmarks have been designed for specific use cases:
+
+* Target platforms are defined in `${platform}Benchmark` source sets.
+  Therefore, you can launch benchmarks for a specific platform using `./gradlew ${PLATFORM}BenchmarkBenchmark`. Example to launch benchmarks on the JVM only: `./gradlew jvmBenchmarkBenchmark`
+* Individual configurations have been setup to launch a benchmark for a specific use-case.
+  Some examples are `./gradlew flattenBenchmark`, `./gradlew takeWhileBigSizeBenchmark`.
+  For a complete list of available use-cases, see *benchmark* -> *configurations* section in link:build.gradle.kts[project build file].
+
+The task will run the benchmark, print a human-readable in standard output, and save a Json report in link:build/reports/benchmarks/[] directory.
+
+It contains JSON reports that can be imported on https://jmh.morethan.io[] website to plot the results.
+
 
 == Project structure
 
