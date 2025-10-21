@@ -13,11 +13,13 @@ kotlin {
     targets {
         jvm {
             compilerOptions {
-                jvmTarget = JvmTarget.JVM_21
+                jvmTarget = JvmTarget.JVM_24
             }
         }
 
         linuxX64()
+
+        macosArm64()
 
         js {
             nodejs()
@@ -97,6 +99,7 @@ benchmark {
     targets {
         register("jvmBenchmark")
         register("linuxX64Benchmark")
+        register("macosArm64Benchmark")
         register("jsBenchmark")
         register("wasmJsBenchmark")
     }
