@@ -1,19 +1,18 @@
 package fr.amanin.bench
 
-import kotlin.math.min
-
 fun <T> Array<T>.takeNoLoop(n: Int) : List<T> {
-    return when (n) {
-        0 -> emptyList()
-        1 -> if (isEmpty()) emptyList() else listOf(this[0])
-        else -> copyOfRange(0, min(n, size)).asList()
-    }
+    require(n >= 0) { "Requested element count $n is less than zero." }
+    if (n == 0) return emptyList()
+    if (n >= size) return toList()
+    if (n == 1) return listOf(this[0])
+    return copyOfRange(0, n).asList()
 }
 
 fun <T> Array<T>.takeLastNoLoop(n: Int) : List<T> {
-    return when (n) {
-        0 -> emptyList()
-        1 -> if (isEmpty()) emptyList() else listOf(this[size-1])
-        else -> copyOfRange(size - min(n, size), size).asList()
-    }
+    require(n >= 0) { "Requested element count $n is less than zero." }
+    if (n == 0) return emptyList()
+    val size = size
+    if (n >= size) return toList()
+    if (n == 1) return listOf(this[size - 1])
+    return copyOfRange(size - n, size).asList()
 }
