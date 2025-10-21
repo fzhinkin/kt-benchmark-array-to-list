@@ -18,22 +18,22 @@ open class StringArrayToList {
     }
 
     @Benchmark
-    open fun usingStd(bh: Blackhole) {
+    open fun toListBaseline(bh: Blackhole) {
         bh.consume(array.toList())
     }
 
     @Benchmark
-    open fun usingCopyOfAsList(bh: Blackhole) {
+    open fun toListOptimized(bh: Blackhole) {
         bh.consume(array.toListUsingAsList())
     }
 
     @Benchmark
-    open fun filterAfterStd(bh: Blackhole) {
+    open fun filterAfterToListBaseline(bh: Blackhole) {
         bh.consume(array.toList().filter { it[0] == '1' })
     }
 
     @Benchmark
-    open fun filterAfterCopyOfAsList(bh: Blackhole) {
+    open fun filterAfterToListOptimized(bh: Blackhole) {
         bh.consume(array.toList().filter { it[0] == '1' })
     }
 }

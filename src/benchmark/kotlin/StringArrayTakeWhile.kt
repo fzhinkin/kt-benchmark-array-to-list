@@ -30,12 +30,12 @@ open class StringArrayTakeWhile {
     }
 
     @Benchmark
-    open fun takeWhileStd(bh: Blackhole) {
+    open fun takeWhileBaseline(bh: Blackhole) {
         bh.consume(array.takeWhile { it != "STOP" })
     }
 
     @Benchmark
-    open fun takeWhileNoLoop(bh: Blackhole) {
+    open fun takeWhileOptimized(bh: Blackhole) {
         bh.consume(array.takeWhileNoLoop { it != "STOP" })
     }
 }

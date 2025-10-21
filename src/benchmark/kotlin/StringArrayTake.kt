@@ -28,32 +28,42 @@ open class StringArrayTake {
     }
 
     @Benchmark
-    open fun takeUsingStd(bh: Blackhole) {
+    open fun takeBaseline(bh: Blackhole) {
         bh.consume(array.take(n))
     }
 
     @Benchmark
-    open fun takeUsingNoLoop(bh: Blackhole) {
+    open fun takeOptimized(bh: Blackhole) {
         bh.consume(array.takeNoLoop(n))
     }
 
     @Benchmark
-    open fun takeLastUsingStd(bh: Blackhole) {
+    open fun takeLastBaseline(bh: Blackhole) {
         bh.consume(array.takeLast(n))
     }
 
     @Benchmark
-    open fun takeLastUsingNoLoop(bh: Blackhole) {
+    open fun takeLastOptimized(bh: Blackhole) {
         bh.consume(array.takeLastNoLoop(n))
     }
 
     @Benchmark
-    open fun filterAfterStd(bh: Blackhole) {
+    open fun filterAfterTakeBaseline(bh: Blackhole) {
         bh.consume(array.take(n).filter { it[0] == '1' })
     }
 
     @Benchmark
-    open fun filterAfterNoLoop(bh: Blackhole) {
+    open fun filterAfterTakeOptimized(bh: Blackhole) {
         bh.consume(array.takeNoLoop(n).filter { it[0] == '1' })
+    }
+
+    @Benchmark
+    open fun filterAfterTakeLastBaseline(bh: Blackhole) {
+        bh.consume(array.takeLast(n).filter { it[0] == '1' })
+    }
+
+    @Benchmark
+    open fun filterAfterTakeLastOptimized(bh: Blackhole) {
+        bh.consume(array.takeLastNoLoop(n).filter { it[0] == '1' })
     }
 }

@@ -24,7 +24,7 @@ open class StringArrayFlatten {
     }
 
     @Benchmark
-    open fun flattenStd(bh: Blackhole) {
+    open fun flattenBaseline(bh: Blackhole) {
         bh.consume(array.flatten())
     }
 
