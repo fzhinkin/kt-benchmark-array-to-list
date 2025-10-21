@@ -6,7 +6,9 @@ jobs:
   jvm-linux-x86:
     #if: false
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -29,9 +31,8 @@ jobs:
           ls $REPORTS_DIR/$DIR_NAME/*.json | while read report_json; do arch_name=$(basename $report_json); cp $report_json results/$DIR_NAME-jvm-$arch_name; done
 
       - name: Publish results
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.TOKEN }}
           add-paths: results/*.json
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
@@ -42,6 +43,9 @@ jobs:
   native-linux-x86:
     #if: false
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -64,9 +68,8 @@ jobs:
           ls $REPORTS_DIR/$DIR_NAME/*.json | while read report_json; do arch_name=$(basename $report_json); cp $report_json results/$DIR_NAME-kn-$arch_name; done
 
       - name: Publish results
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.TOKEN }}
           add-paths: results/*.json
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
@@ -77,6 +80,9 @@ jobs:
   native-macos-arm64:
     #if: false
     runs-on: macos-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -99,9 +105,8 @@ jobs:
           ls $REPORTS_DIR/$DIR_NAME/*.json | while read report_json; do arch_name=$(basename $report_json); cp $report_json results/$DIR_NAME-kn-$arch_name; done
 
       - name: Publish results
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.TOKEN }}
           add-paths: results/*.json
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
@@ -112,6 +117,9 @@ jobs:
   jvm-macos-arm64:
     #if: false
     runs-on: macos-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -134,9 +142,8 @@ jobs:
           ls $REPORTS_DIR/$DIR_NAME/*.json | while read report_json; do arch_name=$(basename $report_json); cp $report_json results/$DIR_NAME-jvm-$arch_name; done
 
       - name: Publish results
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.TOKEN }}
           add-paths: results/*.json
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
@@ -147,6 +154,9 @@ jobs:
   js:
     #if: false
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -169,9 +179,8 @@ jobs:
           ls $REPORTS_DIR/$DIR_NAME/*.json | while read report_json; do arch_name=$(basename $report_json); cp $report_json results/$DIR_NAME-kn-$arch_name; done
 
       - name: Publish results
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.TOKEN }}
           add-paths: results/*.json
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
@@ -182,6 +191,9 @@ jobs:
   wasmJs:
     #if: false
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -204,9 +216,8 @@ jobs:
           ls $REPORTS_DIR/$DIR_NAME/*.json | while read report_json; do arch_name=$(basename $report_json); cp $report_json results/$DIR_NAME-kn-$arch_name; done
 
       - name: Publish results
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.TOKEN }}
           add-paths: results/*.json
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
