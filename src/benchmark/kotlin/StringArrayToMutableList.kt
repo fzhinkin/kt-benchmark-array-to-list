@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 @Warmup(iterations = 5, time = 5)
 @Measurement(iterations = 5, time = 5)
-@State(Scope.Benchmark)
+//@State(Scope.Benchmark)
 open class StringArrayToMutableList {
 
     @Param("1000")
