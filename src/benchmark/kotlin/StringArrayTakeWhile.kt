@@ -8,19 +8,34 @@ import kotlinx.benchmark.*
 @State(Scope.Benchmark)
 open class StringArrayTakeWhile {
     @Param("0", "1", "3", "17", "32", "1000", "100000")
-    var arraySize: Int? = null
+    var arraySize: Int = 0
+
+    @Param("first", "middle", "none")
+    var stopwordPosition: String = ""
+
     lateinit var array: Array<String>
 
     @Setup
     open fun init() {
         val arraySize = checkNotNull(arraySize) { "arraySize parameter not set"}
         array = Array(arraySize) { Random.nextInt(0, 200).toString() }
-        if (arraySize > 1) array[arraySize/2] = "STOP"
+        val stopwordIdx = when (stopwordPosition) {
+            "first" -> 0
+            "middle" -> arraySize / 2
+            else -> -1
+        }
+        if (arraySize > 0 && stopwordIdx >= 0) {
+            array[stopwordIdx] = "STOP"
+        }
     }
 
     @Benchmark
-    open fun takeWhileStd() = array.takeWhile { it != "STOP" }
+    open fun takeWhileStd(bh: Blackhole) {
+        bh.consume(array.takeWhile { it != "STOP" })
+    }
 
     @Benchmark
-    open fun takeWhileNoLoop() = array.takeWhileNoLoop { it != "STOP" }
+    open fun takeWhileNoLoop(bh: Blackhole) {
+        bh.consume(array.takeWhileNoLoop { it != "STOP" })
+    }
 }

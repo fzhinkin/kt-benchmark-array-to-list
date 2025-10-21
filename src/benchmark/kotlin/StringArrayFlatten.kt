@@ -9,26 +9,27 @@ import kotlinx.benchmark.*
 open class StringArrayFlatten {
 
     @Param("1", "3", "100")
-    var arraySize: Int? = null
+    var arraySize: Int = 0
 
     @Param("1", "32", "1000")
-    var innerSize: Int? = null
+    var innerSize: Int = 0
 
     lateinit var array: Array<Array<String>>
 
     @Setup
     open fun init() {
-        val arraySize = checkNotNull(arraySize) { "arraySize parameter not set"}
-        val innerSize = checkNotNull(innerSize) { "innerSize parameter not set"}
         array = Array(arraySize) {
-            i ->
             Array(innerSize) { Random.nextInt(0, 200).toString() }
         }
     }
 
     @Benchmark
-    open fun flattenStd() = array.flatten()
+    open fun flattenStd(bh: Blackhole) {
+        bh.consume(array.flatten())
+    }
 
     @Benchmark
-    open fun flattenOptimized() = array.flattenOptimized()
+    open fun flattenOptimized(bh: Blackhole) {
+        bh.consume(array.flattenOptimized())
+    }
 }

@@ -9,34 +9,31 @@ import kotlinx.benchmark.*
 open class StringArrayToList {
 
     @Param("0", "1", "3", "17", "32", "1000", "100000")
-    var arraySize: Int? = null
+    var arraySize: Int = 0
     lateinit var array: Array<String>
 
     @Setup
     fun init() {
-        val arraySize = checkNotNull(arraySize) { "arraySize parameter not set"}
         array = Array(arraySize) { Random.nextInt(0, 200).toString() }
     }
 
     @Benchmark
-    open fun usingStd() = array.toList()
-
-    //@Benchmark
-    open fun usingStdHacked() = array.toListHacked()
-
-    @Benchmark
-    open fun usingListOf() = array.toListUsingListOf()
-
+    open fun usingStd(bh: Blackhole) {
+        bh.consume(array.toList())
+    }
 
     @Benchmark
-    open fun usingCopyOfAsList() = array.toListUsingAsList()
+    open fun usingCopyOfAsList(bh: Blackhole) {
+        bh.consume(array.toListUsingAsList())
+    }
 
     @Benchmark
-    open fun filterAfterStd() = array.toList().filter { it[0] == '1' }
+    open fun filterAfterStd(bh: Blackhole) {
+        bh.consume(array.toList().filter { it[0] == '1' })
+    }
 
     @Benchmark
-    open fun filterAfterCopyOfAsList() = array.toList().filter { it[0] == '1' }
-
-    @Benchmark
-    open fun filterAfterListOf() = array.toList().filter { it[0] == '1' }
+    open fun filterAfterCopyOfAsList(bh: Blackhole) {
+        bh.consume(array.toList().filter { it[0] == '1' })
+    }
 }
