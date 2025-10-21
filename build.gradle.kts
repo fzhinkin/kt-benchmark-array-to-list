@@ -1,3 +1,4 @@
+import kotlinx.benchmark.gradle.JvmBenchmarkTarget
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -97,7 +98,10 @@ benchmark {
         }
     }
     targets {
-        register("jvmBenchmark")
+        register("jvmBenchmark") {
+            this as JvmBenchmarkTarget
+            jmhVersion = "1.37"
+        }
         register("linuxX64Benchmark")
         register("macosArm64Benchmark")
         register("jsBenchmark")
