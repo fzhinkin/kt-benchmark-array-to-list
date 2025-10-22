@@ -3,8 +3,8 @@ package fr.amanin.bench
 import kotlin.random.Random
 import kotlinx.benchmark.*
 
-@Warmup(iterations = 5, time = 2)
-@Measurement(iterations = 5, time = 1)
+@Warmup(iterations = 5, time = 5)
+@Measurement(iterations = 5, time = 5)
 @State(Scope.Benchmark)
 open class StringArrayToList {
 
