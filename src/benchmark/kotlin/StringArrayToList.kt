@@ -34,6 +34,6 @@ open class StringArrayToList {
 
     @Benchmark
     open fun filterAfterToListOptimized(bh: Blackhole) {
-        bh.consume(array.toList().filter { it[0] == '1' })
+        bh.consume(array.toListUsingAsList().filter { it[0] == '1' })
     }
 }

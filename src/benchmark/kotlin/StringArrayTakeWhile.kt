@@ -38,4 +38,14 @@ open class StringArrayTakeWhile {
     open fun takeWhileOptimized(bh: Blackhole) {
         bh.consume(array.takeWhileNoLoop { it != "STOP" })
     }
+
+    @Benchmark
+    open fun filterAfterTakeWhileBaseline(bh: Blackhole) {
+        bh.consume(array.takeWhile { it != "STOP" }.filter { it[0] == '1' })
+    }
+
+    @Benchmark
+    open fun filterAfterTakeWhileOptimized(bh: Blackhole) {
+        bh.consume(array.takeWhileNoLoop { it != "STOP" }.filter { it[0] == '1' })
+    }
 }
