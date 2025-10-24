@@ -16,6 +16,15 @@ open class StringArrayFlatten {
 
     lateinit var array: Array<Array<String>>
 
+    val arrayFlattenedBaseline: List<String> by lazy {
+        array.flatten()
+    }
+
+    val arrayFlattenedOptimized: List<String> by lazy {
+        array.flattenOptimized()
+    }
+
+
     @Setup
     open fun init() {
         array = Array(arraySize) {
@@ -35,11 +44,11 @@ open class StringArrayFlatten {
 
     @Benchmark
     open fun filterAfterFlattenBaseline(bh: Blackhole) {
-        bh.consume(array.flatten().filter { it[0] == '1' })
+        bh.consume(arrayFlattenedBaseline.filter { it[0] == '1' })
     }
 
     @Benchmark
     open fun filterAfterFlattenOptimized(bh: Blackhole) {
-        bh.consume(array.flattenOptimized().filter { it[0] == '1' })
+        bh.consume(arrayFlattenedOptimized.filter { it[0] == '1' })
     }
 }

@@ -15,6 +15,14 @@ open class StringArrayTakeWhile {
 
     lateinit var array: Array<String>
 
+    val arrayTakeWhileBaseline: List<String> by lazy {
+        array.takeWhile { it != "STOP" }
+    }
+
+    val arrayTakeWhileOptimized: List<String> by lazy {
+        array.takeWhileNoLoop { it != "STOP" }
+    }
+
     @Setup
     open fun init() {
         val arraySize = checkNotNull(arraySize) { "arraySize parameter not set"}
@@ -41,11 +49,11 @@ open class StringArrayTakeWhile {
 
     @Benchmark
     open fun filterAfterTakeWhileBaseline(bh: Blackhole) {
-        bh.consume(array.takeWhile { it != "STOP" }.filter { it[0] == '1' })
+        bh.consume(arrayTakeWhileBaseline.filter { it[0] == '1' })
     }
 
     @Benchmark
     open fun filterAfterTakeWhileOptimized(bh: Blackhole) {
-        bh.consume(array.takeWhileNoLoop { it != "STOP" }.filter { it[0] == '1' })
+        bh.consume(arrayTakeWhileOptimized.filter { it[0] == '1' })
     }
 }

@@ -12,6 +12,14 @@ open class StringArrayToList {
     var arraySize: Int = 0
     lateinit var array: Array<String>
 
+    val arrayToListBaseline: List<String> by lazy {
+        array.toList()
+    }
+
+    val arrayToListOptimized: List<String> by lazy {
+        array.toListUsingAsList()
+    }
+
     @Setup
     fun init() {
         array = Array(arraySize) { Random.nextInt(0, 200).toString() }
@@ -29,11 +37,11 @@ open class StringArrayToList {
 
     @Benchmark
     open fun filterAfterToListBaseline(bh: Blackhole) {
-        bh.consume(array.toList().filter { it[0] == '1' })
+        bh.consume(arrayToListBaseline.filter { it[0] == '1' })
     }
 
     @Benchmark
     open fun filterAfterToListOptimized(bh: Blackhole) {
-        bh.consume(array.toListUsingAsList().filter { it[0] == '1' })
+        bh.consume(arrayToListOptimized.filter { it[0] == '1' })
     }
 }

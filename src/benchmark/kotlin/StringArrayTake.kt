@@ -17,6 +17,22 @@ open class StringArrayTake {
     lateinit var array: Array<String>
     var n : Int = -1
 
+    val arrayTakeBaseline: List<String> by lazy {
+        array.take(n)
+    }
+
+    val arrayTakeOptimized: List<String> by lazy {
+        array.takeNoLoop(n)
+    }
+
+    val arrayTakeLastBaseline: List<String> by lazy {
+        array.takeLast(n)
+    }
+
+    val arrayTakeLastOptimized: List<String> by lazy {
+        array.takeLastNoLoop(n)
+    }
+
     @Setup
     fun init() {
         array = Array(arraySize) { Random.nextInt(0, 200).toString() }
@@ -49,21 +65,21 @@ open class StringArrayTake {
 
     @Benchmark
     open fun filterAfterTakeBaseline(bh: Blackhole) {
-        bh.consume(array.take(n).filter { it[0] == '1' })
+        bh.consume(arrayTakeBaseline.filter { it[0] == '1' })
     }
 
     @Benchmark
     open fun filterAfterTakeOptimized(bh: Blackhole) {
-        bh.consume(array.takeNoLoop(n).filter { it[0] == '1' })
+        bh.consume(arrayTakeOptimized.filter { it[0] == '1' })
     }
 
     @Benchmark
     open fun filterAfterTakeLastBaseline(bh: Blackhole) {
-        bh.consume(array.takeLast(n).filter { it[0] == '1' })
+        bh.consume(arrayTakeBaseline.filter { it[0] == '1' })
     }
 
     @Benchmark
     open fun filterAfterTakeLastOptimized(bh: Blackhole) {
-        bh.consume(array.takeLastNoLoop(n).filter { it[0] == '1' })
+        bh.consume(arrayTakeLastOptimized.filter { it[0] == '1' })
     }
 }
