@@ -75,7 +75,7 @@ open class StringArrayTake {
 
     @Benchmark
     open fun filterAfterTakeLastBaseline(bh: Blackhole) {
-        bh.consume(arrayTakeBaseline.filter { it[0] == '1' })
+        bh.consume(arrayTakeLastBaseline.filter { it[0] == '1' })
     }
 
     @Benchmark
